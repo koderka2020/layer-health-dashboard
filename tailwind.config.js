@@ -5,10 +5,11 @@
         "./src/**/*.{js,ts,jsx,tsx}",
       ],
       theme: {
-        extend: {},
-        colors: {
-          'custom-aqua': '#0FFFF440',
-        }
+        extend: {
+          colors: {
+            'custom-aqua': '#0FFFF440',
+          }
+        },
       },
       plugins: [require('daisyui')],
     }

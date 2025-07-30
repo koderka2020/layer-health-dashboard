@@ -6,7 +6,7 @@ import hippalogo from "../assets/hipaa.avif"
 
 const Footer = () => {
   return(
-    <footer className="footer footer-horizontal footer-center text-base-content rounded p-10">
+    <footer className="footer footer-horizontal footer-center text-base-content rounded p-10 shadow-lg">
         {/* <ReactSVG className="object-top-left p-5" src={logo}/> */}
       <nav>
         <div className="grid grid-flow-col gap-4">
