@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
+import { ReactSVG } from 'react-svg';
 
 
 const Nav = () => {
   return(
-    <div className="navbar bg-base-100 shadow-lg bg-yellow-50">
+    <div className="navbar bg-base-100 shadow-lg bg-yellow-100">
     <div className="flex-1">
-      <a className="btn btn-ghost text-xl">Layer Health</a>
+      <ReactSVG src="../assets/layer-health-logo.svg" />
     </div>
     <div className="flex-none">
       <ul className="menu menu-horizontal px-1">

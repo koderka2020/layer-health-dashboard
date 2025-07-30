@@ -1,15 +1,16 @@
-import SideBar from "./SideBar"
 import Table from './Table'
+import Sidebar from './Sidebar'
 
 const FilterDashboard = () => {
-  return(
-    <>
-      <h1 className="p-10 text-center">FILTER DASH</h1>
-      <SideBar/>
-      <Table/>
-    </>
-  )
-}
 
+  return (
+    <div className="flex">
+      <Sidebar/>
+      <div className="flex-1 p-8">
+        <Table/>
+      </div>
+    </div>
+  );
+};
 
-export default FilterDashboard
+export default FilterDashboard;
