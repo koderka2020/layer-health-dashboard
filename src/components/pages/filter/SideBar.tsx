@@ -12,24 +12,29 @@ const Sidebar = () => {
         <div className="text-xl font-semibold mb-4">Filters</div>
         <div className="dropdown dropdown-bottom">
           <button className="btn btn-primary w-full" onClick={toggleDropdown}>
-            Patient Filters
+            Notes Filters
           </button>
           <ul className={`dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-56 ${isDropdownOpen ? 'block' : 'hidden'}`}>
-            <li><a>Option 1</a></li>
-            <li><a>Option 2</a></li>
-            <li><a>Option 3</a></li>
+            <li><a>id</a></li>
+            <li><a>provider</a></li>
+            <li><a>hospital</a></li>
+            <li><a>date</a></li>
           </ul>
         </div>
         <div className="dropdown dropdown-bottom mt-4">
           <button className="btn btn-primary w-full" onClick={toggleDropdown}>
-            Notes Filters
+            Patient Filters
           </button>
-          <ul className={`dropdown-content menu p-2 shadow bg-base-100 rounded-box w-56 ${isDropdownOpen ? 'block' : 'hidden'}`}>
-            <li><a>Filter 1</a></li>
-            <li><a>Filter 2</a></li>
-            <li><a>Filter 3</a></li>
+          <ul className={`dropdown-content menu p-2 shadow bg-base-300 rounded-box w-56 ${isDropdownOpen ? 'block' : 'hidden'}`}>
+            <li><a>id</a></li>
+            <li><a>name</a></li>
+            <li><a>gender</a></li>
+            <li><a>date of birth</a></li>
           </ul>
         </div>
+        <div className="mt-4">
+         <input type="text" placeholder="Search" className="input input-bordered shadow" />
+      </div>
       </div>
     </div>
   )

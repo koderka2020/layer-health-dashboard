@@ -3,9 +3,9 @@ import { ReactSVG } from 'react-svg';
 import logo from "../assets/layer-health-logo.svg"
 
 
-const Nav = () => {
+const Navbar = () => {
   return(
-    <div className="navbar bg-base-100 shadow-lg bg-yellow-100">
+    <div className="navbar bg-yellow-100 shadow-lg">
     <div className="flex-1">
       <ReactSVG className="p-5" src={logo}/>
     </div>
@@ -16,6 +16,7 @@ const Nav = () => {
           <details>
             <summary>Menu</summary>
             <ul className="bg-base-100 rounded-t-none p-2">
+              <li><Link to="/main">Main</Link></li>
               <li><Link to="/filter">Filter</Link></li>
               <li><Link to="/stats">Stats</Link></li>
             </ul>
@@ -27,4 +28,4 @@ const Nav = () => {
   )
 }
 
-export default Nav;
+export default Navbar;

@@ -1,4 +1,9 @@
+// import { useEffect, useState, useRef } from "react";
+// import notes from '../../../data/mock_notes_small.json'
+// import patients from '../../../data/mock_patients_small.json'
+
 const Table = () => {
+
   return(
     <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
       <table className="table">

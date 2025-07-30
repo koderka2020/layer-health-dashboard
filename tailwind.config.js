@@ -6,6 +6,9 @@
       ],
       theme: {
         extend: {},
+        colors: {
+          'custom-aqua': '#0FFFF440',
+        }
       },
       plugins: [require('daisyui')],
     }
