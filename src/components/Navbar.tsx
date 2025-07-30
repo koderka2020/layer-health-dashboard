@@ -5,25 +5,25 @@ import logo from "../assets/layer-health-logo.svg"
 
 const Navbar = () => {
   return(
-    <div className="navbar bg-base-100 bg-yellow-100 shadow-lg">
-    <div className="flex-1">
-      <ReactSVG className="p-5" src={logo}/>
-    </div>
-    <div className="flex-none">
-      <ul className="menu menu-horizontal px-1">
-        <li><a href="https://www.layerhealth.com/company">Contact</a></li>
-        <li>
-          <details>
-            <summary>Menu</summary>
-            <ul className="bg-base-100 rounded-t-none p-2">
-              <li><Link to="/main">Main</Link></li>
-              <li><Link to="/filter">Filter</Link></li>
-              <li><Link to="/stats">Stats</Link></li>
-            </ul>
-          </details>
-        </li>
-      </ul>
-    </div>
+    <div className="navbar bg-base-100 bg-orange-300 shadow-lg">
+      <div className="flex-1">
+        <ReactSVG className="p-5" src={logo}/>
+      </div>
+      <div className="flex-none">
+        <ul className="menu menu-horizontal px-1">
+          <li><a href="https://www.layerhealth.com/company">Contact</a></li>
+          <li>
+            <details>
+              <summary>Menu</summary>
+              <ul className="bg-base-100 rounded-t-none p-2">
+                <li><Link to="/">Main</Link></li>
+                <li><Link to="/filter">Filter</Link></li>
+                <li><Link to="/stats">Stats</Link></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </div>
     </div>
   )
 }

@@ -10,6 +10,9 @@ const Sidebar = () => {
     <div className="w-64 h-screen bg-gray-500 text-white p-4">
       <div className="flex flex-col">
         <div className="text-xl font-semibold mb-4">Filters</div>
+          <div className="mt-4 mb-8">
+            <input type="text" placeholder="Search" className="input input-bordered shadow" />
+          </div>
         <div className="dropdown dropdown-bottom">
           <button className="btn btn-primary w-full" onClick={toggleDropdown}>
             Notes Filters
@@ -20,6 +23,9 @@ const Sidebar = () => {
             <li><a>hospital</a></li>
             <li><a>date</a></li>
           </ul>
+          <div className="mt-4">
+            <input type="text" placeholder="Search" className="input input-bordered shadow" />
+          </div>
         </div>
         <div className="dropdown dropdown-bottom mt-4">
           <button className="btn btn-primary w-full" onClick={toggleDropdown}>
@@ -31,10 +37,10 @@ const Sidebar = () => {
             <li><a>gender</a></li>
             <li><a>date of birth</a></li>
           </ul>
+            <div className="mt-4">
+              <input type="text" placeholder="Search" className="input input-bordered shadow" />
+            </div>
         </div>
-        <div className="mt-4">
-         <input type="text" placeholder="Search" className="input input-bordered shadow" />
-      </div>
       </div>
     </div>
   )

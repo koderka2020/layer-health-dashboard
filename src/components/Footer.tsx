@@ -6,12 +6,12 @@ import hippalogo from "../assets/hipaa.avif"
 
 const Footer = () => {
   return(
-    <footer className="footer footer-horizontal footer-center text-base-content rounded p-10 shadow-lg">
+    <footer className="footer footer-horizontal footer-center text-base-content rounded p-5 bg-gray-50 shadow-lg">
         {/* <ReactSVG className="object-top-left p-5" src={logo}/> */}
       <nav>
         <div className="grid grid-flow-col gap-4">
-          <img className="rounded-lg w-30 h-20 shadow-md" src={hippalogo}/>
-          <img className="rounded-lg w-30 h-20 shadow-md" src={aicpalogo}/>
+          <img className="rounded-lg w-30 h-20 shadow-sm p-1" src={hippalogo}/>
+          <img className="rounded-lg w-30 h-20 shadow-sm p-1" src={aicpalogo}/>
         </div>
       </nav>
         <nav className="grid grid-flow-col gap-4">

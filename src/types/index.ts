@@ -13,3 +13,16 @@ export interface Note {
   patient_id: number;
   text: string;
 }
+
+//complete patient data - interface
+export interface Patient {
+  id: number;
+  name: string;
+  gender: string;
+  age: number;
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+  };
+}

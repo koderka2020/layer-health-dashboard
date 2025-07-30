@@ -2,15 +2,15 @@ import statsplaceholder from "../../../assets/stats.png"
 
 const StatsDashboard = () => {
   return (
-    <div>
-    <div className="flex justify-center text-white text-xl font-bold">
+    <div className="min-h-screen bg-gradient-to-r from-yellow-50 to-slate-400">
+    <div className="flex justify-center text-grey text-xl font-bold">
     <div className="stats shadow-lg">
       <div className="stat">
         <div className="stat-figure text-secondary">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
-            viewBox="0 0 24 24"
+            viewBox="0 0 48 48"
             className="inline-block h-8 w-8 stroke-current"
           >
             <path
