@@ -12,7 +12,7 @@ const Sidebar = () => {
         <div className="text-xl font-semibold mb-4">Filters</div>
         <div className="dropdown dropdown-bottom">
           <button className="btn btn-primary w-full" onClick={toggleDropdown}>
-            Dropdown Filter
+            Patient Filters
           </button>
           <ul className={`dropdown-content menu p-2 shadow-lg bg-base-100 rounded-box w-56 ${isDropdownOpen ? 'block' : 'hidden'}`}>
             <li><a>Option 1</a></li>
@@ -22,7 +22,7 @@ const Sidebar = () => {
         </div>
         <div className="dropdown dropdown-bottom mt-4">
           <button className="btn btn-primary w-full" onClick={toggleDropdown}>
-            Another Filter
+            Notes Filters
           </button>
           <ul className={`dropdown-content menu p-2 shadow bg-base-100 rounded-box w-56 ${isDropdownOpen ? 'block' : 'hidden'}`}>
             <li><a>Filter 1</a></li>
