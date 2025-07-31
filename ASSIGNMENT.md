@@ -18,7 +18,7 @@ interface note {
 
 } To simplify prototyping we’ve also provided two smaller json files mock_patients_small.json and mock_notes_small.json. These contain the same data but with fewer patients and notes.
 
-Note: All the data in the mock dataset was synthetically generated. The notes were randomly sampled from https://huggingface.co/datasets/starmpcc/Asclepius-Synthetic-Clinical-NotesPage so data in the note such as patient names, ages, etc… most likely will not match the mock patient metadata or mock note metadata.
+Note: All the data in the mock dataset was synthetically generated. The notes were randomly sampled from https://huggingface.co/datasets/starmpcc/Asclepius-Synthetic-Clinical-Notes so data in the note such as patient names, ages, etc… most likely will not match the mock patient metadata or mock note metadata.
 
 Requirements
 
