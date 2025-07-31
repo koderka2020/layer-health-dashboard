@@ -1,6 +1,6 @@
 import { CompleteRecord} from './../types/index'
-import notes from './../data/mock_notes_small.json'
-import patients from './../data/mock_patients_small.json'
+import notes from './../data/mock_notes.json'
+import patients from './../data/mock_patients.json'
 
 const ROWS_PER_PAGE = 15; // number of rows for tables to load at once
 

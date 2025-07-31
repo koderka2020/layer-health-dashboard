@@ -1,5 +1,5 @@
-import patients from '../data/mock_patients_small.json'
-import notes from '../data/mock_notes_small.json'
+import patients from '../data/mock_patients.json'
+import notes from '../data/mock_notes.json'
 import {agregate, convertDate} from './tableFunc'
 
 const CATEGORIES = ['Name', 'Gender', 'Date of birth', 'Provider', 'Hospital', 'Date', 'Keywords']

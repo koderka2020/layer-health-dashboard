@@ -3,7 +3,7 @@ import TagWindow from './TagWindow'
 import { runQuery } from '../../../utils/sidebarFunc'
 import { CompleteRecord } from '../../../types/index'
 import {CATEGORIES} from '../../../utils/sidebarFunc'
-import patients from '../../../data/mock_patients_small.json'
+import patients from '../../../data/mock_patients.json'
 import {agregate} from '../../../utils/tableFunc'
 
 
