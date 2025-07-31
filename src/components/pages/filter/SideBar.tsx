@@ -105,18 +105,20 @@ const Sidebar: React.FC<SidebarProps> = ({visibleDataCount, setVisibleData}) => 
               onKeyDown={handleKeyDown}
               />
           </div>
-          <div className="relative">
-          <TagWindow tags={tags} removeTag={removeTag}/>
+          <div className="mt-5 mb-5">
+            <TagWindow tags={tags} removeTag={removeTag}/>
           </div>
-          <button 
-            className="btn btn-sm bg-green-600 shading-lg text-white"
-            onClick={searchResults}
-            >
-              Search
-            </button>
+          <div className="flex flex-col items-center justify-center h-full">
+            <button 
+              className="btn btn-sm bg-green-600 shading-lg text-white"
+              onClick={searchResults}
+              >
+                Search
+              </button>
+            </div>
         </div>
-        <div className="p-8">
-          <p>Showing {visibleDataCount} records</p>
+        <div className="p-5">
+          <p>Number of records: {visibleDataCount}</p>
         </div>
       </div>
     </div>
