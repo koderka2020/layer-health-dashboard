@@ -1,70 +1,89 @@
-import { useRef } from "react";
-import { useContext } from "react";
-import { Context } from '../../../contexts/Context';
-import {convertDate} from '../../../utils/tableFunc'
-
+import { useState, useRef, useEffect, useContext } from "react";
+import { Context } from "../../../contexts/Context";
+import { convertDate } from "../../../utils/tableFunc";
 
 const NotesPage: React.FC = () => {
-  const { currPatient } = useContext(Context)
+  const { currPatient } = useContext(Context);
   if (!currPatient) return <div>No patient selected</div>;
-  const { name, gender, date_of_birth:dob, notes} = currPatient
 
-  
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { name, gender, date_of_birth: dob, notes } = currPatient;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  // Close popup on click outside
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
+        setOpenIndex(null);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div className="p-10">
-      <>
       <div className="p-5">
         <ul>
           <li className="font-bold underline">Patient Info</li>
-          <li><p></p>Patient: {name}</li>
-          <li><p></p>DOB: {dob}</li>
-          <li><p></p>Gender: {gender}</li>
+          <li>Patient: {name}</li>
+          <li>DOB: {dob}</li>
+          <li>Gender: {gender}</li>
         </ul>
       </div>
-      </>
-      <div 
-        className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100"
-        ref={containerRef}
-        >
+
+      <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
         <table className="table">
-          {/* head */}
           <thead className="bg-gray-100 sticky top-0">
             <tr>
               <th>Provider</th>
-              <th>Hspital</th>
+              <th>Hospital</th>
               <th>Recorded</th>
               <th>Note</th>
               <th>Full Note</th>
             </tr>
           </thead>
           <tbody>
-            {notes.map((note) => (
-              <tr>
+            {notes.map((note, idx) => (
+              <tr key={idx}>
                 <td>{note.provider_name}</td>
                 <td>{note.hospital_name}</td>
                 <td>{convertDate(note.creation_date)}</td>
-                <td>{note.text.slice(0,200) + '...'}</td>
-                <td>
-                {/*  to view full details - popup window */}
-                  <button data-ripple-light="true" data-popover-target="popover"
-                    className="select-none rounded-lg bg-gray-700 py-1 px-4 text-center align-middle font-sans text-xs uppercase text-white shadow-lg shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                <td>{note.text.slice(0, 200) + "..."}</td>
+                <td className="relative">
+                  {/* Open popup */}
+                  <button
+                    onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                    className="select-none rounded-lg bg-gray-700 py-1 px-4 text-center text-xs uppercase text-white shadow-lg hover:shadow-lg transition"
+                  >
                     Open Note
                   </button>
-                  <div data-popover="popover"
-                    className="absolute inset-0 p-2 w-50 h-30 break-words whitespace-normal bg-white border rounded-lg shadow-lg text-blue-gray-500 shadow-blue-gray-500/10 focus:outline-none">
+
+                  {/* Popup */}
+                  {openIndex === idx && (
+                    <div
+                      ref={popupRef}
+                      onMouseLeave={() => setOpenIndex(null)}
+                      className="absolute z-50 right-full mt-1 p-4 bg-white border rounded-lg shadow-lg 
+                                w-[50vw] max-w-[700px] max-h-[70vh] overflow-auto whitespace-pre-wrap break-words"
+                    >
                       {note.text}
-                  </div> 
+                      <button className="btn btn-md bg-green-600 text-white mt-4 shadow-lg hover:shadow-lg transition">
+                        Print
+                      </button>
+                    </div>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        </div>
-        <button className="btn btn-md">Print Records</button>
       </div>
-  )
-}
+    </div>
+  );
+};
 
 export default NotesPage;
