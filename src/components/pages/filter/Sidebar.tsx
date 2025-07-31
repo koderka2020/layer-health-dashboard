@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useContext } from "react";
-import { Context } from "../../../contexts/Context";
+import { Context } from "../../../Contexts/Context";
 import TagWindow from './TagWindow'
 import { runQuery } from '../../../utils/sidebarFunc'
 import {CATEGORIES} from '../../../utils/sidebarFunc'
