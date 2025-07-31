@@ -7,7 +7,7 @@ const Navbar = () => {
   return(
     <div className="navbar bg-base-100 bg-orange-300 shadow-lg">
       <div className="flex-1">
-        <ReactSVG className="p-5" src={logo}/>
+        <ReactSVG className="p-2" src={logo}/>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">

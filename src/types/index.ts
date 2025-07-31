@@ -9,20 +9,22 @@ export interface Note {
   id: number;
   provider_name: string;
   hospital_name: string;
-  created_at: string;
+  creation_date: string;
   patient_id: number;
   text: string;
 }
 
 //complete patient data - interface
-export interface Patient {
+export interface CompleteRecord {
   id: number;
   name: string;
   gender: string;
-  age: number;
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
+  date_of_birth: string;
+  note: {
+    provider_name: string;
+    hospital_name: string;
+    creation_date: string;
+    patient_id: number;
+    text: string;
   };
 }
