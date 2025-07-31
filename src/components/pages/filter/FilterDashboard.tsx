@@ -13,7 +13,7 @@ const FilterDashboard: React.FC<FilterDashboardProps> = () => {
   const [visibleData, setVisibleData] = useState<CompleteRecord[]>([]);
   
   return (
-    <div className="min-h-screen bg-gradient-to-r from-yellow-50 to-slate-400">
+    <div className="h-screen bg-gradient-to-r from-yellow-50 to-slate-400">
     <div className="flex">
       <Sidebar visibleDataCount={visibleData.length} setVisibleData={setVisibleData}/>
       <div className="flex-1 p-8">

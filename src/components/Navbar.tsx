@@ -5,7 +5,7 @@ import logo from "../assets/layer-health-logo.svg"
 
 const Navbar = () => {
   return(
-    <div className="navbar bg-base-100 bg-orange-300 shadow-lg">
+    <div className="navbar bg-base-100 bg-orange-300 shadow-lg sticky top-0 z-50">
       <div className="flex-1">
         <ReactSVG className="p-2" src={logo}/>
       </div>
