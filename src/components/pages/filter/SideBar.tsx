@@ -33,11 +33,11 @@ const Sidebar: React.FC<SidebarProps> = ({visibleDataCount, setVisibleData}) => 
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
   if (e.key === "Enter" && inputValue.trim() && category) {
-    let input = inputValue.trim().split('-').reverse().join('.')
+    let input = inputValue.trim()
     if (category == 'Date'){
       input = inputValue.trim().split('-').reverse().join('.')
     }
-    if (tags.category.includes(input)) return
+    if (tags[category] && tags[category].includes(input)) return
     setTags((prev) => ({
       ...prev,
       [category]: [...(prev[category] || []), input],

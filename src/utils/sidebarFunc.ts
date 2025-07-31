@@ -38,7 +38,6 @@ const runQuery = (tags: Record<string, string[]>) => {
       convertedTagsObj[tagKey].forEach((t) => {
          notes.forEach((n) => {
           if ( n.text.toLowerCase().includes(t.toLowerCase())) {
-            console.log(n)
             filteredIds.push(n.patient_id)
           }
          })
@@ -99,7 +98,7 @@ const runQuery = (tags: Record<string, string[]>) => {
     if (tagKey == 'gender'){
       convertedTagsObj[tagKey].forEach((g) => {
          patients.forEach((p) => {
-          if ( p.gender == g) {
+          if ( p.gender.toLowerCase().includes(g.toLowerCase())) {
             filteredIds.push(p.id)
           }
          })
@@ -119,12 +118,9 @@ const runQuery = (tags: Record<string, string[]>) => {
       })
     }
   })
-  console.log(filteredIds)
   const dedupedFilteredIds = [...new Set(filteredIds)]
-  console.log(dedupedFilteredIds)
   // use utility func to merge patient data with note data:
   const filteredData = agregate(dedupedFilteredIds)
-  console.log(filteredData)
   return filteredData
 }
 
