@@ -1,22 +1,23 @@
 import { useState } from 'react';
+import { useContext } from "react";
+import { Context } from "../../../contexts/Context";
 import TagWindow from './TagWindow'
 import { runQuery } from '../../../utils/sidebarFunc'
-import { CompleteRecord } from '../../../types/index'
 import {CATEGORIES} from '../../../utils/sidebarFunc'
 import patients from '../../../data/mock_patients.json'
 import {agregate} from '../../../utils/tableFunc'
 
 
- interface SidebarProps {
-  visibleDataCount: number;
-   setVisibleData: React.Dispatch<React.SetStateAction<CompleteRecord[]>>;
- } 
 
-const Sidebar: React.FC<SidebarProps> = ({visibleDataCount, setVisibleData}) => {
+const Sidebar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [tags, setTags] = useState<Record<string, string[]>>({});
   const [inputValue, setInputValue] = useState("");
   const [category, setCategory] = useState("")
+
+  //context
+  const { visibleData, setVisibleData } = useContext(Context);
+
 
   const removeTag = (tag: string) => {
     setTags(prev => {
@@ -32,8 +33,10 @@ const Sidebar: React.FC<SidebarProps> = ({visibleDataCount, setVisibleData}) => 
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //only allow input when catyegory selected:
   if (e.key === "Enter" && inputValue.trim() && category) {
     let input = inputValue.trim()
+    // update date format, DaisyUI calendar coponent showing format
     if (category == 'Date'){
       input = inputValue.trim().split('-').reverse().join('.')
     }
@@ -64,7 +67,6 @@ const Sidebar: React.FC<SidebarProps> = ({visibleDataCount, setVisibleData}) => 
     } else {
       //TODO when connected to DB: if there are some filters selected- create a query/filter
       // const query: string = createQuery(tags)
-
       //run query and store results in the state + updte teh table
       results = runQuery(tags) 
     }
@@ -74,7 +76,7 @@ const Sidebar: React.FC<SidebarProps> = ({visibleDataCount, setVisibleData}) => 
 
   
   return(
-    <div className="w-54 h-screen bg-gray-600 text-white p-4">
+    <div className="w-80 h-screen bg-gray-600 text-white p-4">
       <div className="flex flex-col">
         <div className="text-xl font-semibold mb-4">Filters</div>
         <div className="relative" onMouseLeave={() => setIsDropdownOpen(false)}>
@@ -118,7 +120,7 @@ const Sidebar: React.FC<SidebarProps> = ({visibleDataCount, setVisibleData}) => 
             </div>
         </div>
         <div className="p-5">
-          <p>Number of records: {visibleDataCount}</p>
+          <p>Number of records: {visibleData.length}</p>
         </div>
       </div>
     </div>

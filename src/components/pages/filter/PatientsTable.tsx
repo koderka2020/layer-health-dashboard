@@ -1,38 +1,38 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-// import { usePatientContext } from '../../../contexts/Context';
-
+import { useContext } from "react";
+import { Context } from "../../../contexts/Context";
 import patients from "../../../data/mock_patients.json";
 import { CompleteRecord } from "../../../types/index";
 import { agregate, convertDate, ROWS_PER_PAGE } from "../../../utils/tableFunc";
 
-interface PatientsTableProps {
-  visibleData: CompleteRecord[];
-  setVisibleData: React.Dispatch<React.SetStateAction<CompleteRecord[]>>;
-}
 
-const PatientsTable: React.FC<PatientsTableProps> = ({ visibleData, setVisibleData }) => {
+
+const PatientsTable: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  //context state:
+  const { setPatient, visibleData, setVisibleData } = useContext(Context);
+
 
   // NEW: Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [completeDataCount, setTotalCount] = useState(0);
+  // const [completeDataCount, setTotalCount] = useState(0);
 
   // Full dataset (aggregated)
   const fullDataRef = useRef<CompleteRecord[]>([]);
 
   const handleClick = (patientInfo: CompleteRecord) => {
-        //update state in context
-    // setPatient(patientInfo)
-    console.log(patientInfo);
+    //update state - context
+    setPatient(patientInfo)
   };
 
   // Load first page + prepare full data
   useEffect(() => {
     const patient_ids = patients.map((p) => p.id);
     const completeData = agregate(patient_ids);
-    setTotalCount(patient_ids.length)
+    // setTotalCount(patient_ids.length)
 
     fullDataRef.current = completeData;
     setTotalPages(Math.ceil(completeData.length / ROWS_PER_PAGE));
@@ -71,14 +71,14 @@ const PatientsTable: React.FC<PatientsTableProps> = ({ visibleData, setVisibleDa
             </tr>
           </thead>
           <tbody>
-            {visibleData.map((patient) => (
+            {visibleData.map((patient: CompleteRecord) => (
               <tr key={patient.id}>
                 <td>{patient.name}</td>
                 <td>{convertDate(patient.date_of_birth)}</td>
                 <td>{patient.gender}</td>
                 <td>
                   <Link to="/notes">
-                    <button className="btn btn-sm" onClick={() => handleClick(patient)}>
+                    <button key={patient.id} className="btn btn-sm" onClick={() => handleClick(patient)}>
                       Open
                     </button>
                   </Link>

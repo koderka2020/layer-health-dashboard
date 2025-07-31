@@ -1,34 +1,32 @@
-// import { createContext, useState, useContext, ReactNode } from 'react';
-// import {CompleteRecord} from '../types/index'
+import React, { createContext, useState, ReactNode } from 'react';
+import {CompleteRecord} from '../types/index'
 
-// //Context 
-// interface ContextType {
-//   currPatient: CompleteRecord | null;
-//   setPatient: (newData: string) => void;
-// }
+//Context 
+interface ContextProps {
+  currPatient: CompleteRecord | null;
+  setPatient: React.Dispatch<React.SetStateAction<CompleteRecord | null>>;
+  visibleData: CompleteRecord[]; 
+  setVisibleData: React.Dispatch<React.SetStateAction<CompleteRecord[]>>;
+}
 
-// const PatientContext = createContext<ContextType | undefined>(undefined)
+// eslint-disable-next-line react-refresh/only-export-components
+export const Context = createContext<ContextProps>({
+  currPatient: null,
+  setPatient: () => {},
+  visibleData: [],
+  setVisibleData: () => {},
+});
 
-// //Provider
-// interface ProviderProps {
-//   children: ReactNode;
-// }
 
 
-// export const Provider = ({ children }: ProviderProps) => {
-//   const [ currPatient, setPatient ] = useState<CompleteRecord | null>(null)
-//   return (
-//     <PatientContext.Provider value={{ currPatient, setPatient }}>
-//       {children}
-//     </PatientContext.Provider>
-//   );
-// };
+//Provider
+export const ContextProvider = ({ children }: { children: ReactNode }) => {
+  const [ currPatient, setPatient ] = useState<CompleteRecord | null>(null);
+  const [visibleData, setVisibleData] = useState<CompleteRecord[]>([]);
 
-// // Custom hook to use the UserContext
-// export const usePatientContext = () => {
-//     const context = useContext(PatientContext);
-//     if (!context) {
-//         throw new Error('useUserContext must be used within a UserContextProvider');
-//     }
-//     return context;
-// };
+  return (
+    <Context.Provider value={{ currPatient, setPatient, visibleData, setVisibleData }}>
+      {children}
+    </Context.Provider>
+  );
+};
