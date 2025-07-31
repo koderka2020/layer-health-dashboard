@@ -1,8 +1,8 @@
 // import { useRef } from "react";
-import { useContext } from "react";
+// import { useContext } from "react";
 // import { Context } from '../../../contexts/Context';
 import notes from '../../../data/mock_notes.json'
-import {convertDate, ROWS_PER_PAGE} from '../../../utils/tableFunc'
+import {convertDate} from '../../../utils/tableFunc'
 
 
 const NotesPage = () => {
