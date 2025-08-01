@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Context } from "../../../Contexts/Context";
 import patients from "../../../data/mock_patients.json";
 import { CompleteRecord } from "../../../types/index";
-import { agregate, convertDate } from "../../../utils/tableFunc";
+import { combineData, convertDate } from "../../../utils/tableFunc";
 
 
 
@@ -48,7 +48,7 @@ const PatientsTable: React.FC = () => {
   // Load first page + prepare full data
   useEffect(() => {
     const patient_ids = patients.map((p) => p.id);
-    const completeData = agregate(patient_ids);
+    const completeData = combineData(patient_ids);
     console.log(completeData.length)
     fullDataRef.current = completeData;
     const calculatedRows = calculateRowsPerPage();

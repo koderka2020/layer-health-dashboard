@@ -5,7 +5,7 @@ import TagWindow from './TagWindow'
 import { runQuery } from '../../../utils/sidebarFunc'
 import {CATEGORIES} from '../../../utils/sidebarFunc'
 import patients from '../../../data/mock_patients.json'
-import {agregate} from '../../../utils/tableFunc'
+import {combineData} from '../../../utils/tableFunc'
 
 
 
@@ -74,7 +74,7 @@ const Sidebar: React.FC = () => {
     if (!Object.keys(tags).length) {
       //if there are no filters and return all
       const patient_ids = patients.map( p => p.id)
-      results = agregate(patient_ids)
+      results = combineData(patient_ids)
     } else {
       //TODO when connected to DB: if there are some filters selected- create a query/filter
       // const query: string = createQuery(tags)
