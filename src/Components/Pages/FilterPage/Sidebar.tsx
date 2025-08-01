@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useContext } from "react";
 import { Context } from "../../../Contexts/Context";
 import TagWindow from './TagWindow'
 import { runQuery } from '../../../utils/sidebarFunc'
 import {CATEGORIES} from '../../../utils/sidebarFunc'
 import patients from '../../../data/mock_patients.json'
-import {agregate} from '../../../utils/tableFunc'
+import {combineData} from '../../../utils/tableFunc'
 
 
 
@@ -13,13 +13,22 @@ const Sidebar: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [tags, setTags] = useState<Record<string, string[]>>({});
   const [inputValue, setInputValue] = useState("");
-  const [category, setCategory] = useState("")
+  const [category, setCategory] = useState("");
+  const [tagArrRemovingAction, setTagArrRemovingAction] = useState(false);
 
   //context
-  const { visibleData, setVisibleData } = useContext(Context);
+  const { visibleData, setVisibleData, totalDataCount } = useContext(Context);
 
+  useEffect(() => {
+    // This effect will run whenever 'count' changes
+    if (tagArrRemovingAction) { // Optional: Add a condition to prevent running on initial render
+      searchResults();
+      setTagArrRemovingAction(false);
+    }
+  }, [tags]);
 
   const removeTag = (tag: string) => {
+    setTagArrRemovingAction(true);
     setTags(prev => {
       const updated: Record<string, string[]> = {};
       for (const key in prev){
@@ -46,6 +55,8 @@ const Sidebar: React.FC = () => {
       [category]: [...(prev[category] || []), input],
     }));
     setInputValue("");
+    setCategory("")
+    setIsDropdownOpen(false)
     }
   };
 
@@ -63,7 +74,7 @@ const Sidebar: React.FC = () => {
     if (!Object.keys(tags).length) {
       //if there are no filters and return all
       const patient_ids = patients.map( p => p.id)
-      results = agregate(patient_ids)
+      results = combineData(patient_ids)
     } else {
       //TODO when connected to DB: if there are some filters selected- create a query/filter
       // const query: string = createQuery(tags)
@@ -129,7 +140,8 @@ const Sidebar: React.FC = () => {
             </div>
         </div>
         <div className="p-5">
-          <p>Number of records: {visibleData.length}</p>
+          <p>Number of records per page : {visibleData.length}</p>
+          <p>Number of records total : {totalDataCount}</p>
         </div>
       </div>
     </div>

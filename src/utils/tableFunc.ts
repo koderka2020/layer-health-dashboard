@@ -1,11 +1,9 @@
 import { CompleteRecord} from './../types/index'
 import notes from './../data/mock_notes.json'
 import patients from './../data/mock_patients.json'
+import { ROWS_PER_PAGE } from './variables'
 
-const ROWS_PER_PAGE = 13; // number of rows for tables to load at once
-
-
-const agregate = (patientsIds: number[] ) =>{
+const combineData = (patientsIds: number[] ) =>{
     const listOfPatients: CompleteRecord[] = []
     //get all patients details based on Id's
     const patientsData = patients.filter((p) => patientsIds.includes(p.id) )
@@ -37,4 +35,4 @@ const agregate = (patientsIds: number[] ) =>{
     return newOrder
   }
 
-  export {agregate, convertDate, ROWS_PER_PAGE}
+  export {combineData, convertDate, ROWS_PER_PAGE}
