@@ -10,6 +10,7 @@ const CATEGORIES_COLOR_MAP = {
   'Keywords': '#84CC16' // lime
 }
 
+const ROWS_PER_PAGE = 20; // number of rows for tables to load at once
 
 
-export { CATEGORIES, CATEGORIES_COLOR_MAP }
+export { CATEGORIES, CATEGORIES_COLOR_MAP, ROWS_PER_PAGE }

@@ -30,12 +30,17 @@ $ npm run dev
 ### Pages
 * Landing Page: Entry point with quick navigation to dashboards.
 * Patient Records Dashboard:
+    * Records sorted in alphabetical order
     * Combined filters for metadata across patients and notes.
     * Duplicate‑tag prevention and case‑insensitive string search.
+    * Resetting category after each selection
+    * Updated the search results when filters removed
     * Unified date formatting between raw data and calendar inputs.
     * Built‑in pagination for large datasets.
 * Stats Dashboard: Visual mockups and image placeholders for analytics.
-* Notes Dashboard: Detailed view of notes for individual patients.
+* Notes Dashboard: 
+    * Detailed view of notes for individual patients.
+    * Shows results based on the filter (specific doctor/hospital)
 * Error Page: Graceful fallback for invalid or mutated URLs.
 
 

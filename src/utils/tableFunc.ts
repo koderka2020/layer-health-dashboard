@@ -1,9 +1,7 @@
 import { CompleteRecord} from './../types/index'
 import notes from './../data/mock_notes.json'
 import patients from './../data/mock_patients.json'
-
-const ROWS_PER_PAGE = 13; // number of rows for tables to load at once
-
+import { ROWS_PER_PAGE } from './variables'
 
 const agregate = (patientsIds: number[] ) =>{
     const listOfPatients: CompleteRecord[] = []

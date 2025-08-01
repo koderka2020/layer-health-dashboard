@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Context } from "../../../Contexts/Context";
 import patients from "../../../data/mock_patients.json";
 import { CompleteRecord } from "../../../types/index";
-import { agregate, convertDate, ROWS_PER_PAGE } from "../../../utils/tableFunc";
+import { agregate, convertDate } from "../../../utils/tableFunc";
 
 
 
@@ -12,12 +12,13 @@ const PatientsTable: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   //context state:
-  const { setPatient, visibleData, setVisibleData } = useContext(Context);
+  const { setPatient, visibleData, setVisibleData, setTotalDataCount } = useContext(Context);
 
 
   // NEW: Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   // const [completeDataCount, setTotalCount] = useState(0);
 
   // Full dataset (aggregated)
@@ -28,17 +29,56 @@ const PatientsTable: React.FC = () => {
     setPatient(patientInfo)
   };
 
+  // Calculate rows that fit on screen
+  const calculateRowsPerPage = () => {
+    const tableContainer = containerRef.current;
+    if (!tableContainer) return 10;
+
+    const containerHeight = tableContainer.clientHeight;
+    const headerHeight = 60; // Approximate header height
+    const rowHeight = 50; // Approximate row height
+    const paginationHeight = 80; // Approximate pagination height
+    
+    const availableHeight = containerHeight - headerHeight - paginationHeight;
+    const calculatedRows = Math.floor(availableHeight / rowHeight);
+    
+    return Math.max(1, calculatedRows);
+  };
+
   // Load first page + prepare full data
   useEffect(() => {
     const patient_ids = patients.map((p) => p.id);
     const completeData = agregate(patient_ids);
-    // setTotalCount(patient_ids.length)
-
+    console.log(completeData.length)
     fullDataRef.current = completeData;
-    setTotalPages(Math.ceil(completeData.length / ROWS_PER_PAGE));
-
-    setVisibleData(completeData.slice(0, ROWS_PER_PAGE));
+    const calculatedRows = calculateRowsPerPage();
+    setRowsPerPage(calculatedRows);
+    setTotalPages(Math.ceil(completeData.length / calculatedRows));
+    setTotalDataCount(completeData.length)
+    setVisibleData(completeData.slice(0, calculatedRows));
   }, []);
+
+  // Recalculate rows when window resizes
+  useEffect(() => {
+    const handleResize = () => {
+      const calculatedRows = calculateRowsPerPage();
+      setRowsPerPage(calculatedRows);
+      setTotalPages(Math.ceil(fullDataRef.current.length / calculatedRows));
+      
+      // Adjust current page if it exceeds new total pages
+      if (currentPage > Math.ceil(fullDataRef.current.length / calculatedRows)) {
+        setCurrentPage(1);
+      }
+      
+      // Update visible data with new page size
+      const startIndex = (currentPage - 1) * calculatedRows;
+      const endIndex = startIndex + calculatedRows;
+      setVisibleData(fullDataRef.current.slice(startIndex, endIndex));
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [currentPage]);
 
   // Handle page change
   const goToPage = (page: number) => {
@@ -46,8 +86,8 @@ const PatientsTable: React.FC = () => {
 
     setCurrentPage(page);
 
-    const startIndex = (page - 1) * ROWS_PER_PAGE;
-    const endIndex = startIndex + ROWS_PER_PAGE;
+    const startIndex = (page - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
 
     setVisibleData(fullDataRef.current.slice(startIndex, endIndex));
 
@@ -56,9 +96,9 @@ const PatientsTable: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="h-full flex flex-col">
       <div
-        className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100"
+        className="flex-1 overflow-auto rounded-box border border-base-content/5 bg-base-100"
         ref={containerRef}
       >
         <table className="table">
@@ -90,7 +130,7 @@ const PatientsTable: React.FC = () => {
       </div>
 
       {/* Pagination controls */}
-      <div className="join p-3 flex justify-center gap-2">
+      <div className="join p-3 flex justify-center gap-2 flex-shrink-0">
         <button
           className="join-item btn"
           onClick={() => goToPage(currentPage - 1)}
