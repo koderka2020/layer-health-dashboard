@@ -98,7 +98,13 @@ const runQuery = (tags: Record<string, string[]>) => {
     if (tagKey == 'gender'){
       convertedTagsObj[tagKey].forEach((g) => {
          patients.forEach((p) => {
-          if ( p.gender.toLowerCase().includes(g.toLowerCase())) {
+          let newGtag = ''
+          if ( g[0].toLowerCase() == 'm'){
+            newGtag = 'Male'
+          }else{
+            newGtag = 'Female'
+          }
+          if ( p.gender.toLowerCase() == (newGtag.toLowerCase())) {
             filteredIds.push(p.id)
           }
          })
