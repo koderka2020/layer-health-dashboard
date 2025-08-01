@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useContext } from "react";
 import { Context } from "../../../Contexts/Context";
 import TagWindow from './TagWindow'
@@ -32,10 +32,10 @@ const Sidebar: React.FC = () => {
     });
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const addFilter = () => {
   //only allow input when catyegory selected:
-  if (e.key === "Enter" && inputValue.trim() && category) {
-    let input = inputValue.trim()
+  if (category) {
+    let input = inputValue
     // update date format, DaisyUI calendar coponent showing format
     if (category == 'Date'){
       input = inputValue.trim().split('-').reverse().join('.')
@@ -97,15 +97,24 @@ const Sidebar: React.FC = () => {
             ))}
           </ul>
           }
-          <div className="mt-4">
+          <div 
+          className="mt-4 flex flex-row items-center">
             <input 
               type={category == "Date of birth" || category == "Date"? "date" :"text"} 
-              placeholder={category ? `Search by ${category}` : 'Choose category'}
+              placeholder={category ? `Search by ${category}` : 'Choose filter'}
               className="input input-bordered text-black shadow-lg" 
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={handleKeyDown}
-              />
+              // onKeyDown={handleKeyDown}
+             />
+            <div className="p-2">
+              <button
+                className="btn btn-sm bg-green-600 shading-lg text-white"
+                onClick={addFilter}
+                >
+                Add
+              </button>
+            </div>
           </div>
           <div className="mt-5 mb-5">
             <TagWindow tags={tags} removeTag={removeTag}/>

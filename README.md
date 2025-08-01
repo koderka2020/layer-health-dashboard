@@ -52,7 +52,7 @@ $ npm run dev
 * AI‑assisted filtering: Implement an AI agent to suggest and auto‑complete search terms by category.
 * Styling upgrades: Improve visuals and ensure consistent code formatting (VSCode settings).
 * Testing: Add unit/integration tests for core components and workflows.
-* State management improvements:
+* State management improvements
 * Make search results persistent using Context, Redux, or local storage.
 * Saved queries: Allow users to store and reuse frequently used filters, combinable with new ones.
 * Themes and modes: Introduce color themes or light/dark modes.

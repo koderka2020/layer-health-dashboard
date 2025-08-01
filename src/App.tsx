@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
-import LandingPage from './Components/pages/main-dash/LandingPage';
-import FilterDashboard from './Components/pages/filter/FilterDashboard';
-import StatsDashboard from './Components/pages/stats/StatsDashboard';
-import NotesPage from './Components/pages/filter/NotesPage';
-import NotFound from './Components/pages/NotFound';
+import LandingPage from './Components/Pages/LandingPage/LandingPage';
+import FilterDashboard from './Components/Pages/FilterPage/FilterDashboard';
+import StatsDashboard from './Components/Pages/StatsPage/StatsDashboard';
+import NotesPage from './Components/Pages/FilterPage/NotesPage';
+import NotFound from './Components/Pages/NotFound';
 
 
 

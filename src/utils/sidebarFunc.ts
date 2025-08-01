@@ -1,8 +1,8 @@
 import patients from '../data/mock_patients.json'
 import notes from '../data/mock_notes.json'
 import {agregate, convertDate} from './tableFunc'
+import { CATEGORIES } from './variables'
 
-const CATEGORIES = ['Name', 'Gender', 'Date of birth', 'Provider', 'Hospital', 'Date', 'Keywords']
 
 //placeholder for future work with DBs
 const createQuery = (parameters:Record<string, string>): void => {
